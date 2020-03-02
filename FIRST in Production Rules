@@ -1,0 +1,59 @@
+'''
+Program to calculate First and Follow sets of given grammar
+Before proceeding, it is highly recommended to be familiar with the basics in Syntax Analysis, 
+LL(1) parsing and the rules of calculating First and Follow sets of a grammar.
+-Introduction to Syntax Analysis
+-Why First and Follow?
+-FIRST Set in Syntax Analysis
+-FOLLOW Set in Syntax Analysis
+Assuming the reader is familiar with the basics discussed above,
+let’s start discussing how to implement the python program to calculate the first of given grammar.
+'''
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+#Program TO Find FIRST of Given Production Rules
+
+def first(c):
+    for i in range(num_rules):
+            if(rules[i][:1]==c):
+                if(rules[i][3:4].isupper()):
+                    first(str(rules[i][3:4]))
+                else:
+                    ans.append(str(rules[i][3:4]))
+
+num_rules=int(input("Enter no of productions\n"))
+rules=[]
+ans=[]
+find=[]
+for i in range(num_rules):
+    rules.append(input())
+#print(rules)
+for rule in rules:
+    if str(rule[0][:1]) not in find:
+        find.append(str(rule[0][:1]))
+
+print("-----------------------------------------------------")
+for f in find:
+    first(f)
+    print(f,ans)
+    ans.clear()
+    
+    
+OUTPUT:
+Enter no of productions
+7
+E->TR
+R->+TR
+R->$
+T->FY
+Y->*FY
+F->(E)
+F->i
+-----------------------------------------------------
+E ['(', 'i']
+R ['+', '$']
+T ['(', 'i']
+Y ['*']
+F ['(', 'i']
+
+Process finished with exit code 0
