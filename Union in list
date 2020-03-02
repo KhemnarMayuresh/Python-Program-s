@@ -1,0 +1,15 @@
+#print names that appear in either or both lists.
+
+def unique_names(names1, names2):
+    unic=[]
+    for name in names1:
+        if name not in unic:
+            unic.append(name)
+    for name in names2:
+        if name not in unic:
+            unic.append(name)
+    return unic
+
+names1 = ["Ava", "Emma", "Olivia"]
+names2 = ["Olivia", "Sophia", "Emma"]
+print(unique_names(names1, names2)) # should print Ava, Emma, Olivia, Sophia
