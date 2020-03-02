@@ -1,0 +1,65 @@
+#Program for lexical Analyzer
+keywords = ("if","else","for","while","break","continue","int","float","char","bool", "void", "main", "printf")
+operators = ("+","-","*","/","=","^",">","<",">=","<=")
+special_symbols= ("(", ")", ";", "'", ",", ":", "{", "}", "%d", "%c", "%s", "%f","\"")
+
+#remove comments in input
+def reduceComment(x):
+    st=x.find("/*")
+    end=x.find("*/")
+    final =x[:st]
+    final=final+x[end+2:]
+    return final
+
+#taking input statement
+input_string = input("Enter statement\n")
+
+
+while "/*" in input_string:
+    input_string =reduceComment(input_string)
+print("code without comment :\n"+input_string)
+
+#generating tokens
+tokens= input_string.split()
+
+for token in tokens:
+    flag = 0
+    for keyword in keywords:
+        if(token==keyword):
+            print(token+" is a keyword")
+            flag=1
+            break
+    for operator in operators:
+        if (token == operator):
+            print(token + " is a operator")
+            flag=2
+            break
+    for special_symbol in special_symbols:
+        if token==special_symbol:
+            print(token + " is a special_symbol")
+            flag=3
+            break
+    if (token[0].isalpha() ==True or token.isdigit()==True)  and flag==0:
+        print(token + " is a Identifier")
+
+OUTPUT:
+Enter statement
+void main ( ) { /* int xyz*/ int x ; printf ( "%d" , i ) ;
+code without comment :
+void main ( ) {  int x ; printf ( "%d" , i ) ;
+void is a keyword
+main is a keyword
+( is a special_symbol
+) is a special_symbol
+{ is a special_symbol
+int is a keyword
+x is a Identifier
+; is a special_symbol
+printf is a keyword
+( is a special_symbol
+, is a special_symbol
+i is a Identifier
+) is a special_symbol
+; is a special_symbol
+
+Process finished with exit code 0
